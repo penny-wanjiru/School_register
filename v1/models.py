@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class School(models.Model):
     school_types = (
         ('day', 'DAY'),
@@ -36,7 +37,7 @@ class Level(models.Model):
 
 
 class Teacher(models.Model):
-    name = models.CharField(unique=True, max_length=200)
+    name = models.CharField(max_length=200)
     level = models.ForeignKey(Level, on_delete=models.CASCADE)
     email = models.EmailField(max_length=255, blank=True)
 
@@ -49,3 +50,4 @@ class Student(models.Model):
 class Register(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     date = models.DateField()
+    roll_call = models.BooleanField(required=True)

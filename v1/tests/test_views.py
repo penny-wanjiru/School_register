@@ -40,3 +40,4 @@ class TeacherAPITests(APITestCase):
         data = {'name': 'Roo'}
         response = self.client.post(url, data, format='json')
         self.assertEqual(Teacher.objects.count(), 1)
+        
