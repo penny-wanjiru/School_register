@@ -11,29 +11,21 @@ class School(models.Model):
     email = models.EmailField(max_length=255, blank=True)
 
 
-class Stream(models.Model):
-    stream_choices = (
-        ('A', 'a'),
-        ('B', 'b'),
-        ('C', 'c'),
-        ('D', 'd'),
-    )
-    name = models.CharField(unique=True, max_length=200)
-
-
-class Form(models.Model):
+class Level(models.Model):
     form_choices = (
         ('1', 'one'),
         ('2', 'two'),
         ('3', 'three'),
         ('4', 'four'),
     )
-    name = models.IntegerField(choices=form_choices)
-
-
-class Level(models.Model):
-    stream = models.ForeignKey(Stream, on_delete=models.CASCADE)
-    form = models.ForeignKey(Form, on_delete=models.CASCADE)
+    stream_choices = (
+        ('A', 'a'),
+        ('B', 'b'),
+        ('C', 'c'),
+        ('D', 'd'),
+    )
+    stream = models.CharField(choices=stream_choices, max_length=255)
+    form = models.IntegerField(choices=form_choices)
 
 
 class Teacher(models.Model):
@@ -42,12 +34,14 @@ class Teacher(models.Model):
     email = models.EmailField(max_length=255, blank=True)
 
 
+class Register(models.Model):
+    school = models.ForeignKey(School, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher)
+    date = models.DateField()
+    is_present = models.BooleanField()
+
+
 class Student(models.Model):
     name = models.CharField(max_length=255, blank=False, null=False)
     level = models.ForeignKey(Level, on_delete=models.CASCADE)
-
-
-class Register(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    date = models.DateField()
-    roll_call = models.BooleanField(required=True)
+    register = models.ForeignKey(Register, related_name="students")

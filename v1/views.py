@@ -1,10 +1,9 @@
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 
-from .models import School, Student, Teacher, Stream, Register, Form, Level
-from .serializers import (SchoolSerializer, StudentSerializer,
-                          TeacherSerializer, StreamSerializer,
-                          FormSerializer, LevelSerializer,
+from .models import School, Student, Teacher, Register, Level
+from .serializers import (SchoolSerializer, StudentSerializer, 
+                          TeacherSerializer, LevelSerializer,
                           RegisterSerializer)
 
 
@@ -24,18 +23,6 @@ class StudentViewSet(viewsets.ModelViewSet):
 class TeacherViewSet(viewsets.ModelViewSet):
     queryset = Teacher.objects.all()
     serializer_class = TeacherSerializer
-    permissions = (AllowAny)
-
-
-class StreamViewSet(viewsets.ModelViewSet):
-    queryset = Stream.objects.all()
-    serializer_class = StreamSerializer
-    permissions = (AllowAny,)
-
-
-class FormViewSet(viewsets.ModelViewSet):
-    queryset = Form.objects.all()
-    serializer_class = FormSerializer
     permissions = (AllowAny)
 
 

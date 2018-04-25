@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import School, Student, Teacher, Stream, Register, Form, Level
+from .models import School, Student, Teacher, Register, Level
 
 
 class SchoolSerializer(serializers.ModelSerializer):
@@ -26,22 +26,6 @@ class TeacherSerializer(serializers.ModelSerializer):
         model = Teacher
 
 
-class StreamSerializer(serializers.ModelSerializer):
-    """Stream model serializer."""
-
-    class Meta:
-        fields = '__all__'
-        model = Stream
-
-
-class FormSerializer(serializers.ModelSerializer):
-    """Form model serializer"""
-
-    class Meta:
-        fields = '__all__'
-        model = Form
-
-
 class LevelSerializer(serializers.ModelSerializer):
     """Level model serializer"""
 
@@ -52,7 +36,8 @@ class LevelSerializer(serializers.ModelSerializer):
 
 class RegisterSerializer(serializers.ModelSerializer):
     """Register model serializer"""
+    students = StudentSerializer(many=True)
 
     class Meta:
-        fields = '__all__'
+        fields = ('id', 'school', 'teacher', 'students', 'date', 'is_present')
         model = Register
