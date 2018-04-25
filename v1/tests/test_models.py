@@ -5,7 +5,7 @@ from v1.models import School, Student, Teacher, Stream, Register, Form, Level
 
 class TestSchool(TestCase):
 
-     def test_school_creation(self):
+    def test_school_creation(self):
         """Test that a school can be created"""
         school_object = School.objects.create(
             name='Nova', email='test@gmail.com', school_type='DAY', )
