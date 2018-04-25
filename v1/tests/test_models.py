@@ -1,8 +1,9 @@
 import datetime
-from rest_framework.test import APITestCase
+from django.test import TestCase
+from v1.models import School, Student, Teacher, Stream, Register, Form, Level
 
 
-class TestSchool(APITestCase):
+class TestSchool(TestCase):
 
      def test_school_creation(self):
         """Test that a school can be created"""
@@ -12,7 +13,7 @@ class TestSchool(APITestCase):
         self.assertEqual(1, School.objects.count())
 
 
-class TestStream(APITestCase):
+class TestStream(TestCase):
 
     def test_stream_creation(self):
         """Test that a stream can be created"""
@@ -21,7 +22,7 @@ class TestStream(APITestCase):
         self.assertEqual(1, Stream.objects.count())
 
 
-class TestForm(APITestCase):
+class TestForm(TestCase):
 
     def test_form_creation(self):
         """Test that a form can be created"""
@@ -30,7 +31,7 @@ class TestForm(APITestCase):
         self.assertEqual(1, Form.objects.count())
 
 
-class TestLevel(APITestCase):
+class TestLevel(TestCase):
 
     def setUp(self):
         self.stream = Stream.objects.create(name='B')
@@ -39,16 +40,16 @@ class TestLevel(APITestCase):
     def test_level_creation(self):
         """Test that a class level can be created"""
         level_object = Level.objects.create(stream=self.stream, form=self.form)
-        self.assertEqual(level_object.name, '1')
+        self.assertEqual(level_object.stream.name, 'B')
         self.assertEqual(1, Level.objects.count())
 
 
-class TestTeacher(APITestCase):
+class TestTeacher(TestCase):
 
     def setUp(self):
         self.stream = Stream.objects.create(name='B')
         self.form = Form.objects.create(name='2')
-        self.level = Levelx.objects.create(stream=self.stream, form=self.form)
+        self.level = Level.objects.create(stream=self.stream, form=self.form)
 
     def test_teacher_creation(self):
         """Test that a teacher can be created"""
@@ -58,7 +59,7 @@ class TestTeacher(APITestCase):
         self.assertEqual(1, Teacher.objects.count())
 
 
-class TestStudent(APITestCase):
+class TestStudent(TestCase):
 
     def setUp(self):
         self.stream = Stream.objects.create(name='A')
@@ -67,12 +68,12 @@ class TestStudent(APITestCase):
 
     def test_student_creation(self):
         """Test that a student can be created"""
-        student_object = Teacher.objects.create(name='Jane', level=self.level)
+        student_object = Student.objects.create(name='Jane', level=self.level)
         self.assertEqual(student_object.name, 'Jane')
         self.assertEqual(1, Student.objects.count())
 
 
-class TestRegister(APITestCase):
+class TestRegister(TestCase):
 
     def setUp(self):
         self.stream = Stream.objects.create(name='C')

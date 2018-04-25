@@ -31,22 +31,21 @@ class Form(models.Model):
 
 
 class Level(models.Model):
-    stream = models.ForeignKey(Stream, related_name='stream', on_delete=models.CASCADE)
-    form = models.ForeignKey(Form, related_name='form', on_delete=models.CASCADE)
+    stream = models.ForeignKey(Stream, on_delete=models.CASCADE)
+    form = models.ForeignKey(Form, on_delete=models.CASCADE)
 
 
 class Teacher(models.Model):
     name = models.CharField(unique=True, max_length=200)
-    level = models.ForeignKey(Level, related_name='level', on_delete=models.CASCADE)
+    level = models.ForeignKey(Level, on_delete=models.CASCADE)
     email = models.EmailField(max_length=255, blank=True)
 
 
 class Student(models.Model):
     name = models.CharField(max_length=255, blank=False, null=False)
-    date_of_birth = models.DateField()
-    level = models.ForeignKey(Level, related_name='level', on_delete=models.CASCADE)
+    level = models.ForeignKey(Level, on_delete=models.CASCADE)
 
 
 class Register(models.Model):
-    student = models.ForeignKey(Student, related_name='student', on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
     date = models.DateField()
