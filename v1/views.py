@@ -2,9 +2,10 @@ from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 
 from .models import School, Student, Teacher, Register, Level
-from .serializers import (SchoolSerializer, StudentSerializer, 
+from .serializers import (SchoolSerializer, StudentSerializer,
                           TeacherSerializer, LevelSerializer,
-                          RegisterSerializer)
+                          RegisterSerializer, ParentStudentSerializer,
+                          ParentRegisterSerializer, ParentTeacherSerializer)
 
 
 class SchoolViewSet(viewsets.ModelViewSet):
@@ -16,14 +17,26 @@ class SchoolViewSet(viewsets.ModelViewSet):
 class StudentViewSet(viewsets.ModelViewSet):
 
     queryset = Student.objects.all()
-    serializer_class = StudentSerializer
     permissions = (AllowAny)
+    serializer_class = StudentSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return ParentStudentSerializer
+        else:
+            return self.serializer_class
 
 
 class TeacherViewSet(viewsets.ModelViewSet):
     queryset = Teacher.objects.all()
     serializer_class = TeacherSerializer
     permissions = (AllowAny)
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return ParentTeacherSerializer
+        else:
+            return self.serializer_class
 
 
 class LevelViewSet(viewsets.ModelViewSet):
@@ -36,3 +49,9 @@ class RegisterViewSet(viewsets.ModelViewSet):
     queryset = Register.objects.all()
     serializer_class = RegisterSerializer
     permissions = (AllowAny)
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return ParentRegisterSerializer
+        else:
+            return self.serializer_class
