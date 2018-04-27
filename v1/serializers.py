@@ -10,22 +10,6 @@ class SchoolSerializer(serializers.ModelSerializer):
         model = School
 
 
-class StudentSerializer(serializers.ModelSerializer):
-    """Student model serializer."""
-
-    class Meta:
-        fields = '__all__'
-        model = Student
-
-
-class TeacherSerializer(serializers.ModelSerializer):
-    """Teacher model serializer."""
-
-    class Meta:
-        fields = '__all__'
-        model = Teacher
-
-
 class LevelSerializer(serializers.ModelSerializer):
     """Level model serializer"""
 
@@ -34,10 +18,41 @@ class LevelSerializer(serializers.ModelSerializer):
         model = Level
 
 
-class RegisterSerializer(serializers.ModelSerializer):
-    """Register model serializer"""
-    students = StudentSerializer(many=True)
+class StudentSerializer(serializers.ModelSerializer):
+    """Student model serializer."""
 
     class Meta:
-        fields = ('id', 'school', 'teacher', 'students', 'date', 'is_present')
+        fields = ("name", "level")
+        model = Student
+
+
+class TeacherSerializer(serializers.ModelSerializer):
+    """Teacher model serializer."""
+
+    class Meta:
+        fields = ('name', 'level', 'email')
+        model = Teacher
+
+
+
+class RegisterSerializer(serializers.ModelSerializer):
+    """Register model serializer"""
+    
+
+    class Meta:
+        fields = ('id', 'school', 'teacher', 'student', 'date', 'is_present')
         model = Register
+
+
+class ParentStudentSerializer(StudentSerializer):
+    level = LevelSerializer()
+
+
+class ParentTeacherSerializer(TeacherSerializer):
+    level = LevelSerializer()
+
+
+class ParentRegisterSerializer(RegisterSerializer):
+    teacher = TeacherSerializer()
+    school = SchoolSerializer()
+    student = StudentSerializer()
