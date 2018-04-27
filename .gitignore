@@ -1,3 +1,5 @@
 # Environments
 .venv
 venv/
+
+v1/migrations/*
