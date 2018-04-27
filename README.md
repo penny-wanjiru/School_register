@@ -33,3 +33,4 @@ To run tests:
 
 ## TO DO:
 Add CI for the project
+Add more tests
