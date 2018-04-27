@@ -7,8 +7,8 @@ router = DefaultRouter()
 router.register(r'schools', views.SchoolViewSet)
 router.register(r'students', views.StudentViewSet)
 router.register(r'teachers', views.TeacherViewSet)
-router.register(r'class', views.LevelViewSet)
 router.register(r'register', views.RegisterViewSet)
+router.register(r'level', views.LevelViewSet)
 
 
 # The API URLs are now determined automatically by the router.
