@@ -33,6 +33,6 @@ To run tests:
 `python manage.py test`
 
 ## TO DO:
-Add CI for the project
-Bulk create for register
-Add more tests
+*Add CI for the project
+*Bulk create for register
+*Add more tests
