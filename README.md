@@ -9,6 +9,7 @@
 # Features:
 *  CRUD for school, teacher, level, register, student.
 *  Retrieve a list of all registers.
+*  Bulk create a list of students
 
 ## Usage:
 
@@ -33,4 +34,5 @@ To run tests:
 
 ## TO DO:
 Add CI for the project
+Bulk create for register
 Add more tests

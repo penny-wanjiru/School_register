@@ -34,10 +34,8 @@ class TeacherSerializer(serializers.ModelSerializer):
         model = Teacher
 
 
-
 class RegisterSerializer(serializers.ModelSerializer):
     """Register model serializer"""
-    
 
     class Meta:
         fields = ('id', 'school', 'teacher', 'student', 'date', 'is_present')

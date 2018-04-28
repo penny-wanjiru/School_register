@@ -40,7 +40,8 @@ class Level(models.Model):
 
 class Teacher(models.Model):
     name = models.CharField(max_length=200)
-    level = models.ForeignKey(Level, on_delete=models.CASCADE, related_name="level")
+    level = models.ForeignKey(Level, on_delete=models.CASCADE,
+                              related_name="level")
     email = models.EmailField(max_length=255, blank=True)
 
     def __str__(self):
@@ -56,15 +57,14 @@ class Student(models.Model):
 
 
 class Register(models.Model):
-    school = models.ForeignKey(School, on_delete=models.CASCADE, 
-                                related_name="school")
+    school = models.ForeignKey(School, on_delete=models.CASCADE,
+                               related_name="school")
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE,
                                 related_name="teacher")
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, 
+    student = models.ForeignKey(Student, on_delete=models.CASCADE,
                                 related_name="student")
     date = models.DateField()
     is_present = models.BooleanField()
 
     def __str__(self):
         return self.date
-
